@@ -22,7 +22,7 @@ export const FloatingChat: React.FC<FloatingChatProps> = ({ webhookUrl }) => {
       right: isMobile ? '10px' : '20px',
       left: isMobile ? '10px' : 'auto',
       width: isMobile ? 'calc(100% - 20px)' : '400px',
-      height: isMobile ? 'calc(100vh - 100px)' : '600px',
+      height: 'fit-content',
       maxWidth: isMobile ? '100%' : '400px',
       maxHeight: isMobile ? 'calc(100vh - 100px)' : '600px',
       zIndex: '9999'
@@ -43,7 +43,7 @@ export const FloatingChat: React.FC<FloatingChatProps> = ({ webhookUrl }) => {
         '¡Hola! Soy el asistente virtual de Ucademy, tengo toda la información que necesitas sobre nuestras formaciones, pregúntame todo lo que necesites. ¡Estoy aquí para resolver tus dudas!'
       ],
       i18n: {
-        es: {
+        en: {
           title: 'Bienvenido a Ucademy!👋🏼',
           subtitle: '',
           getStarted: 'Nueva conversación',

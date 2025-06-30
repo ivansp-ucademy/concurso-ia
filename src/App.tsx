@@ -152,35 +152,6 @@ function App() {
         background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0fdf4 100%)',
         minHeight: '100vh'
       }}>
-      {/* Botón de Debug Temporal - Solo para testing */}
-      <div
-        style={{
-          position: 'fixed',
-          top: '10px',
-          left: '10px',
-          zIndex: 10000,
-          background: '#ff4757',
-          color: 'white',
-          padding: '8px 12px',
-          borderRadius: '20px',
-          fontSize: '12px',
-          fontWeight: 'bold',
-          cursor: 'pointer',
-          boxShadow: '0 4px 12px rgba(255, 71, 87, 0.3)'
-        }}
-        onClick={event => {
-          console.log('🔍 ESTADO DEBUG:');
-          console.log('isChatEnabled:', isChatEnabled);
-          console.log('chat-window-toggle:', document.getElementsByClassName('chat-window-toggle'));
-          console.log('n8n-chat-target:', document.getElementById('n8n-chat-target'));
-          console.log('window.innerWidth:', window.innerWidth);
-          console.log('¿Es móvil?:', window.innerWidth <= 768);
-          console.log('Elemento clicked:', event.currentTarget);
-          handleChatClick(event as React.MouseEvent);
-        }}>
-        🔍 DEBUG CHAT
-      </div>
-
       {/* Hero Section */}
       <div
         style={{
