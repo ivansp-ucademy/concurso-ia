@@ -19,6 +19,31 @@ html, body {
   overflow-y: scroll;
 }
 
+/* Estilos para el chat */
+.chat-window-wrapper {
+  /* background: linear-gradient(135deg, #d1fae5 0%, #10b981 100%) !important; */
+  border-radius: 30px !important;
+  /* box-shadow: 0 10px 40px rgba(16, 185, 129, 0.3) !important; */
+}
+
+.chat-get-started-footer{
+  display: none !important;
+}
+
+.chat-window-toggle {
+  background: linear-gradient(135deg, #d1fae5 0%, #10b981 100%) !important;
+  border: none !important;
+  border-radius: 50% !important;
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4) !important;
+  color: white !important;
+}
+
+.chat-window-toggle:hover {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0 6px 25px rgba(16, 185, 129, 0.6) !important;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -30,6 +55,10 @@ html, body {
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.chat-button{
+  background:  #10b981 !important;
 }
 
 @keyframes logo-spin {
