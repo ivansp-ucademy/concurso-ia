@@ -30,6 +30,10 @@ html, body {
   display: none !important;
 }
 
+.chat-inputs textarea{
+  color: #1e1e1e !important;
+}
+
 .chat-window-toggle {
   background: linear-gradient(135deg, #d1fae5 0%, #10b981 100%) !important;
   border: none !important;

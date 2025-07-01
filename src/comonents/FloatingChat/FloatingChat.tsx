@@ -22,10 +22,11 @@ export const FloatingChat: React.FC<FloatingChatProps> = ({ webhookUrl }) => {
       right: isMobile ? '10px' : '20px',
       left: isMobile ? '10px' : 'auto',
       width: isMobile ? 'calc(100% - 20px)' : '400px',
-      height: 'fit-content',
       maxWidth: isMobile ? '100%' : '400px',
       maxHeight: isMobile ? 'calc(100vh - 100px)' : '600px',
-      zIndex: '9999'
+      height: 'fit-content',
+      zIndex: '9999',
+      color: '#1e1e1e'
     });
     document.body.appendChild(wrapper);
 
@@ -62,9 +63,9 @@ export const FloatingChat: React.FC<FloatingChatProps> = ({ webhookUrl }) => {
         right: isMobileNow ? '10px' : '20px',
         left: isMobileNow ? '10px' : 'auto',
         width: isMobileNow ? 'calc(100% - 20px)' : '400px',
-        height: isMobileNow ? 'calc(100vh - 100px)' : '600px',
         maxWidth: isMobileNow ? '100%' : '400px',
-        maxHeight: isMobileNow ? 'calc(100vh - 100px)' : '600px'
+        maxHeight: isMobileNow ? 'calc(100vh - 100px)' : '600px',
+        height: 'fit-content'
       });
     };
 

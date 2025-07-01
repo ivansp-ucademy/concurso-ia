@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import './App.css';
 import { FloatingChat } from './comonents/FloatingChat/FloatingChat';
 import {
@@ -28,105 +28,55 @@ import {
 const { Title, Paragraph, Text } = Typography;
 
 function App() {
-  const [isChatEnabled, setIsChatEnabled] = useState(false);
-
   const triggerChat = (event?: React.MouseEvent | MouseEvent) => {
-    // Prevenir comportamiento por defecto y propagación
     if (event) {
       event.preventDefault();
       event.stopPropagation();
     }
 
-    console.log('🚀 Intentando activar chat...', { isChatEnabled, event: event?.type });
-
-    // Estrategia 1: Buscar elemento con clase chat-window-toggle
     const chatWindowToggle = document.getElementsByClassName('chat-window-toggle')?.[0];
     if (chatWindowToggle) {
-      console.log('✅ Encontrado chat-window-toggle, haciendo click...');
       (chatWindowToggle as HTMLElement).click();
       return;
     }
 
-    // Estrategia 2: Buscar el target de n8n directamente
     const n8nTarget = document.getElementById('n8n-chat-target');
     if (n8nTarget) {
-      console.log('✅ Encontrado n8n-chat-target, haciendo click...');
       (n8nTarget as HTMLElement).click();
       return;
     }
 
-    // Estrategia 3: Buscar cualquier botón del chat
     const chatButton = document.querySelector(
       '[data-key="chat"] button, .n8n-chat button, button[class*="chat"]'
     );
     if (chatButton) {
-      console.log('✅ Encontrado botón del chat, haciendo click...');
       (chatButton as HTMLElement).click();
-      return;
     }
-
-    // Estrategia 4: Intentar después de un pequeño delay (para elementos que se cargan dinámicamente)
-    console.log('⏳ No se encontró elemento, intentando después de 500ms...');
-    setTimeout(() => {
-      const delayedToggle =
-        document.getElementsByClassName('chat-window-toggle')?.[0] ||
-        document.getElementById('n8n-chat-target') ||
-        document.querySelector('[data-key="chat"] button, .n8n-chat button, button[class*="chat"]');
-
-      if (delayedToggle) {
-        console.log('✅ Elemento encontrado con delay, haciendo click...');
-        (delayedToggle as HTMLElement).click();
-      } else {
-        console.error('❌ No se pudo encontrar ningún elemento del chat para activar');
-        // Fallback: mostrar alerta o abrir WhatsApp/email
-        alert(
-          '¡Hola! El chat se está cargando. Si tienes dudas urgentes, puedes escribirnos por WhatsApp o email.'
-        );
-      }
-    }, 500);
   };
 
-  // Función wrapper para los botones de Ant Design
   const handleChatClick = (event: React.MouseEvent) => {
-    console.log('🎯 Click detectado en botón:', event.currentTarget);
-    console.log('📱 Tipo de evento:', event.type);
-    console.log('🔍 Es touch device:', 'ontouchstart' in window);
     triggerChat(event);
   };
 
   useEffect(() => {
-    console.log('🔄 Configurando detector de chat...', { isChatEnabled });
-
-    // Función para verificar si el chat está visible
     const checkChatVisibility = () => {
       const chatWrapper = document.getElementById('n8n-chat-wrapper');
-      const isVisible =
+      return (
         chatWrapper &&
         chatWrapper.style.display !== 'none' &&
         chatWrapper.offsetWidth > 0 &&
-        chatWrapper.offsetHeight > 0;
-
-      console.log('👁️ Estado del chat:', { isVisible, chatWrapper });
-      setIsChatEnabled(!!isVisible);
-
-      return !!isVisible;
+        chatWrapper.offsetHeight > 0
+      );
     };
 
-    // Verificar estado inicial
-    const initialState = checkChatVisibility();
-    console.log('🎯 Estado inicial del chat:', initialState);
-
-    // Crear un observer para detectar cambios en el DOM
     const observer = new MutationObserver(mutations => {
       mutations.forEach(mutation => {
         if (mutation.type === 'childList' || mutation.type === 'attributes') {
-          const currentState = checkChatVisibility();
-          console.log('🔍 Observer detectó cambio:', { currentState, mutation });
+          checkChatVisibility();
         }
       });
     });
 
-    // Observar cambios en el body y en el chat wrapper si existe
     observer.observe(document.body, {
       childList: true,
       subtree: true,
@@ -134,17 +84,15 @@ function App() {
       attributeFilter: ['style', 'class']
     });
 
-    // También usar un interval para verificar periódicamente
     const intervalId = setInterval(() => {
       checkChatVisibility();
     }, 1000);
 
     return () => {
-      console.log('🧹 Limpiando detector de chat...');
       observer.disconnect();
       clearInterval(intervalId);
     };
-  }, []); // Solo ejecutar una vez al montar el componente
+  }, []);
 
   return (
     <div
